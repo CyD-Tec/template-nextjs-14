@@ -62,7 +62,7 @@ const NavItem1 = {
           id: "itemCollapse-3",
           title: "Vigentes",
           type: "item",
-          url: "nav-item-3-1",
+          url: "/nav-item-3-1",
           // es necesario para que funcione el active en menu
           breadcrumbs: false,
         },
@@ -70,7 +70,7 @@ const NavItem1 = {
           id: "itemCollapse-4",
           title: "Históricos",
           type: "item",
-          url: "itemCollapse-3-2",
+          url: "/nav-item-3-2",
           breadcrumbs: false,
         },
       ]

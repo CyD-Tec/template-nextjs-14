@@ -75,6 +75,11 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   })
 );
 
+const ToolbarCustom = styled(Toolbar)({
+  paddingLeft: "16px !important",
+  paddingRight: "24px !important",
+});
+
 // ==============================|| MAIN LAYOUT ||============================== //
 
 const MainLayout = ({ children }) => {
@@ -96,9 +101,13 @@ const MainLayout = ({ children }) => {
 
   const header = useMemo(
     () => (
-      <Toolbar sx={{ p: condition ? "10px" : "16px" }}>
+      <ToolbarCustom
+        sx={{
+          p: condition ? "10px" : "16px",
+        }}
+      >
         <Header />
-      </Toolbar>
+      </ToolbarCustom>
     ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [layout, matchDownMd]
@@ -116,6 +125,7 @@ const MainLayout = ({ children }) => {
         sx={{
           bgcolor: theme.palette.background.default,
           transition: drawerOpen ? theme.transitions.create("width") : "none",
+          height: "60px",
         }}
       >
         {header}
@@ -125,11 +135,7 @@ const MainLayout = ({ children }) => {
       <Sidebar />
 
       {/* main content */}
-      <Main
-        theme={theme}
-        open={drawerOpen}
-        // sx={{ ml: !drawerOpen && "-188px !important" }}
-      >
+      <Main theme={theme} open={drawerOpen} sx={{ mt: "60px" }}>
         {/* breadcrumb */}
         {container && (
           <Container maxWidth="lg">

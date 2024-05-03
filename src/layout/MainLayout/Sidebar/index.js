@@ -1,31 +1,31 @@
-import { memo, useMemo } from 'react';
+import { memo, useMemo } from "react";
 
 // material-ui
-import { Box, Drawer, Stack, useMediaQuery } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import { Box, Drawer, Stack, useMediaQuery } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
 // third-party
-import PerfectScrollbar from 'react-perfect-scrollbar';
+import PerfectScrollbar from "react-perfect-scrollbar";
 
 // project imports
-import Chip from '@/components/Chip';
-import LogoSection from '../LogoSection';
-import MenuList from '../MenuList';
-import MiniDrawerStyled from './MiniDrawerStyled';
+import Chip from "@/components/Chip";
+import MenuList from "../MenuList";
+import MiniDrawerStyled from "./MiniDrawerStyled";
 
-import { LAYOUT_CONST } from '@/constant';
-import useConfig from '@/hooks/useConfig';
-import { drawerWidth } from '@/store/constant';
+import { LAYOUT_CONST } from "@/constant";
+import useConfig from "@/hooks/useConfig";
+import { drawerWidth } from "@/store/constant";
 
-import { useDispatch, useSelector } from '@/store';
-import { openDrawer } from '@/store/slices/menu';
+import { useDispatch, useSelector } from "@/store";
+import { openDrawer } from "@/store/slices/menu";
+import LogoSection from "../LogoSection";
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
 const Sidebar = () => {
   const theme = useTheme();
-  const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
-  const matchDownMd = useMediaQuery(theme.breakpoints.down('md'));
+  const matchUpMd = useMediaQuery(theme.breakpoints.up("md"));
+  const matchDownMd = useMediaQuery(theme.breakpoints.down("md"));
 
   const dispatch = useDispatch();
   const { drawerOpen } = useSelector((state) => state.menu);
@@ -34,7 +34,7 @@ const Sidebar = () => {
 
   const logo = useMemo(
     () => (
-      <Box sx={{ display: 'flex', p: 2 }}>
+      <Box sx={{ display: "flex", p: 2, height: "60px" }}>
         <LogoSection />
       </Box>
     ),
@@ -47,16 +47,22 @@ const Sidebar = () => {
       {/* {layout === LAYOUT_CONST.VERTICAL_LAYOUT && drawerOpen && <MenuCard />} */}
       {layout === LAYOUT_CONST.VERTICAL_LAYOUT && drawerOpen && (
         <Stack direction="row" justifyContent="center" sx={{ mb: 2 }}>
-          <Chip label={process.env.REACT_APP_VERSION} disabled chipcolor="secondary" size="small" sx={{ cursor: 'pointer' }} />
+          <Chip
+            label={process.env.REACT_APP_VERSION}
+            disabled
+            chipcolor="secondary"
+            size="small"
+            sx={{ cursor: "pointer" }}
+          />
         </Stack>
       )}
     </>
   );
 
   const drawerSX = {
-    paddingLeft: drawerOpen ? '16px' : 0,
-    paddingRight: drawerOpen ? '16px' : 0,
-    marginTop: drawerOpen ? 0 : '20px'
+    paddingLeft: drawerOpen ? "16px" : 0,
+    paddingRight: drawerOpen ? "16px" : 0,
+    marginTop: drawerOpen ? 0 : "14px",
   };
 
   const drawer = useMemo(
@@ -68,8 +74,8 @@ const Sidebar = () => {
           <PerfectScrollbar
             component="div"
             style={{
-              height: !matchUpMd ? 'calc(100vh - 56px)' : 'calc(100vh - 88px)',
-              ...drawerSX
+              height: !matchUpMd ? "calc(100vh - 56px)" : "calc(100vh - 88px)",
+              ...drawerSX,
             }}
           >
             {drawerContent}
@@ -82,22 +88,27 @@ const Sidebar = () => {
   );
 
   return (
-    <Box component="nav" sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : 'auto' }} aria-label="mailbox folders">
-      {matchDownMd || (drawerType === LAYOUT_CONST.MINI_DRAWER && drawerOpen) ? (
+    <Box
+      component="nav"
+      sx={{ flexShrink: { md: 0 }, width: matchUpMd ? drawerWidth : "auto" }}
+      aria-label="mailbox folders"
+    >
+      {matchDownMd ||
+      (drawerType === LAYOUT_CONST.MINI_DRAWER && drawerOpen) ? (
         <Drawer
-          variant={matchUpMd ? 'persistent' : 'temporary'}
+          variant={matchUpMd ? "persistent" : "temporary"}
           anchor="left"
           open={drawerOpen}
           onClose={() => dispatch(openDrawer(!drawerOpen))}
           sx={{
-            '& .MuiDrawer-paper': {
+            "& .MuiDrawer-paper": {
               mt: matchDownMd ? 0 : 11,
               zIndex: 1099,
               width: drawerWidth,
               background: theme.palette.background.default,
               color: theme.palette.text.primary,
-              borderRight: 'none'
-            }
+              borderRight: "none",
+            },
           }}
           ModalProps={{ keepMounted: true }}
           color="inherit"

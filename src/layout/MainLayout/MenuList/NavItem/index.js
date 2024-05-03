@@ -36,6 +36,20 @@ const NavItem = ({ item, level, parentId, isParents = false }) => {
 
   const { selectedItem, drawerOpen } = useSelector((state) => state.menu);
 
+  const arrActiveItems = useMemo(() => {
+    const arr = [];
+    if (parentId) arr.push(parentId);
+    arr.push(item.id);
+    return arr;
+  }, [pathname]);
+
+  useEffect(() => {
+    if (item.url === pathname) {
+      dispatch(activeID(item.id));
+      dispatch(activeItem(arrActiveItems));
+    }
+  }, [item, pathname]);
+
   const isSelected =
     selectedItem &&
     typeof selectedItem !== "string" &&
@@ -77,25 +91,11 @@ const NavItem = ({ item, level, parentId, isParents = false }) => {
     itemTarget = "_blank";
   }
 
-  const arrActiveItems = useMemo(() => {
-    const arr = [];
-    if (parentId) arr.push(parentId);
-    arr.push(item.id);
-    return arr;
-  }, []);
-
   const itemHandler = (id) => {
     dispatch(activeItem(arrActiveItems));
     if (matchesSM) dispatch(openDrawer(false));
     dispatch(activeID(parentId));
   };
-
-  useEffect(() => {
-    if (item.url === pathname) {
-      dispatch(activeID(item.id));
-      dispatch(activeItem(arrActiveItems));
-    }
-  }, [pathname]);
 
   return (
     <>

@@ -1,5 +1,11 @@
+import MainCard from "@/components/cards/MainCard";
+
 function NavItems1() {
-  return <div>Nav item 1</div>;
+  return (
+    <MainCard title={"un titulo"}>
+      <div>Nav item 1</div>
+    </MainCard>
+  );
 }
 
 export default NavItems1;

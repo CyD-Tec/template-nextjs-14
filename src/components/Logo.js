@@ -20,7 +20,8 @@ const Logo = () => {
     <Image
       src={theme.palette.mode === "dark" ? logo : logo}
       alt="CyD"
-      width="110"
+      width={110}
+      // height={60}
       priority={true}
     ></Image>
   );

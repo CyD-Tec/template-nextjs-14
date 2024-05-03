@@ -31,6 +31,8 @@ const Header = ({ nombreProceso }) => {
           [theme.breakpoints.down("md")]: {
             width: "auto",
           },
+          display: "flex",
+          alignItems: "center",
         }}
       >
         <Box
@@ -64,12 +66,14 @@ const Header = ({ nombreProceso }) => {
                   ? theme.palette.secondary.light
                   : theme.palette.secondary.light,
             },
-            mt: 1,
+            // mt: 1,
+            width: '30px',
+            height: '30px',
           }}
           onClick={() => dispatch(openDrawer(!drawerOpen))}
           color="inherit"
         >
-          <IconMenu2 stroke={1.5} size="1.3rem" />
+          <IconMenu2 stroke={1.5} size="1rem" />
         </Avatar>
       </Box>
 

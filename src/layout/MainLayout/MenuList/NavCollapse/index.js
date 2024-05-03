@@ -23,10 +23,11 @@ import NavItem from "../NavItem";
 
 import PopperItem from "../PopperItem";
 
-import { useSelector } from "@/store";
+import { useDispatch, useSelector } from "@/store";
 
 // assets
 import useConfig from "@/hooks/useConfig";
+import { activeID, activeItem } from "@/store/slices/menu";
 import FiberManualRecordIcon from "@mui/icons-material/FiberManualRecord";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 
@@ -86,7 +87,7 @@ const PopperStyled = styled(Popper)(({ theme }) => ({
 
 const NavCollapse = ({ menu, level, parentId }) => {
   const theme = useTheme();
-
+  const dispatch = useDispatch();
   const hookConf = useConfig();
   const { layout, borderRadius } = hookConf;
   const { selectedItem, drawerOpen } = useSelector((state) => state.menu);
@@ -117,15 +118,6 @@ const NavCollapse = ({ menu, level, parentId }) => {
   const openMini = Boolean(anchorEl);
   const pathname = usePathname();
 
-  const checkOpenForParent = (child, id) => {
-    child.forEach((item) => {
-      if (pathname.includes(item.url)) {
-        setOpen(true);
-        setSelected(id);
-      }
-    });
-  };
-
   // menu collapse for sub-levels
   useEffect(() => {
     setOpen(false);
@@ -134,6 +126,10 @@ const NavCollapse = ({ menu, level, parentId }) => {
     if (menu.children && selectedItem && typeof selectedItem !== "string") {
       menu.children.forEach((item) => {
         const isSelected = selectedItem.findIndex((id) => id === item.id) > -1;
+        if (item.url === pathname) {
+          dispatch(activeID(item.id));
+          dispatch(activeItem([menu.id, item.id]));
+        }
         if (isSelected) {
           setSelected(menu.id);
           setOpen(true);
@@ -148,7 +144,6 @@ const NavCollapse = ({ menu, level, parentId }) => {
   const menus = menu.children?.map((item) => {
     switch (item.type) {
       case "collapse":
-        console.log('collapse',item, parentId)
         return (
           <NavCollapse
             key={item.id}
@@ -176,8 +171,19 @@ const NavCollapse = ({ menu, level, parentId }) => {
     }
   });
 
+  const checkURL = () => {
+    for (const item of menu.children) {
+      if (item.url === pathname) {
+        return true;
+      }
+    }
+    return false;
+  };
+
+  // const isSelected = true;
   const isSelected =
-    selectedItem && selectedItem.findIndex((id) => id === selected) > -1;
+    (selectedItem && selectedItem.findIndex((id) => id === selected) > -1) ||
+    checkURL();
 
   const Icon = menu.icon;
   const menuIcon = menu.icon ? (

@@ -99,7 +99,7 @@ const ProfileSection = () => {
     <>
       <Chip
         sx={{
-          height: "48px",
+          height: "36px",
           alignItems: "center",
           borderRadius: "27px",
           transition: "all .2s ease-in-out",
@@ -130,6 +130,8 @@ const ProfileSection = () => {
               ...theme.typography.mediumAvatar,
               margin: "8px 0 8px 8px !important",
               cursor: "pointer",
+              width: "24px",
+              height: "24px",
             }}
             ref={anchorRef}
             aria-controls={open ? "menu-list-grow" : undefined}
