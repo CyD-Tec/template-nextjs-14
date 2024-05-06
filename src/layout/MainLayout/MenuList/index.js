@@ -21,7 +21,6 @@ const MenuList = () => {
   const { layout } = useConfig();
   const { drawerOpen } = useSelector((state) => state.menu);
 
-  const getMenu = Menu();
   const handlerMenuItem = () => {
     const isFound = menuItem.items.some((element) => {
       if (element.id === "widget") {
