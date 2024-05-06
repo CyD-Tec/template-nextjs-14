@@ -13,7 +13,8 @@ pnpm dev
 # or
 bun dev
 ```
-Create .env file using env.example for complete all variable environment that the project need.
+
+To get more information go to Confluence page
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
