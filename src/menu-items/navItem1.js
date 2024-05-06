@@ -53,14 +53,14 @@ const NavItem1 = {
     },
     {
       id: "itemCollapse",
-      title: "Personas",
+      title: "ItemsCollapse",
       type: "collapse",
       icon: icons.IconSettings,
       breadcrumbs: false,
       children: [
         {
           id: "itemCollapse-3",
-          title: "Vigentes",
+          title: "Item 1",
           type: "item",
           url: "/nav-item-3-1",
           // es necesario para que funcione el active en menu
@@ -68,7 +68,7 @@ const NavItem1 = {
         },
         {
           id: "itemCollapse-4",
-          title: "Históricos",
+          title: "Item 2",
           type: "item",
           url: "/nav-item-3-2",
           breadcrumbs: false,

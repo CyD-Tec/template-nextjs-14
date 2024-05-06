@@ -12,7 +12,6 @@ import NavItem from "./NavItem";
 import { HORIZONTAL_MAX_ITEM } from "@/config";
 import { LAYOUT_CONST } from "@/constant";
 import menuItem from "@/menu-items";
-import { Menu } from "@/menu-items/widget";
 import { useSelector } from "@/store";
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
@@ -31,9 +30,6 @@ const MenuList = () => {
       return false;
     });
 
-    if (getMenu?.id !== undefined && !isFound) {
-      menuItem.items.splice(1, 0, getMenu);
-    }
   };
 
   useEffect(() => {
